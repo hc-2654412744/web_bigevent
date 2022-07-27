@@ -34,7 +34,7 @@ $(function() {
         //阻止默认的提交行为
         e.preventDefault()
         //发起Ajax的post请求
-        $.post('/reguser',{username: $('#form_reg [name=username]').val(),password:$('#form_reg [name=password]').val()},function(res) {
+        $.post('/api/reguser',{username: $('#form_reg [name=username]').val(),password:$('#form_reg [name=password]').val()},function(res) {
             if(res.status !== 0) {
                 return layer.msg(res.message)
             }
@@ -60,6 +60,7 @@ $(function() {
                 }
                 layer.msg('登录成功！')
                 //将登录成功得到的token字符串，保存到localStorage中
+                localStorage.setItem('token', res.token)
                 //跳转到后台主页
                 location.href = '/index.html'
             }
